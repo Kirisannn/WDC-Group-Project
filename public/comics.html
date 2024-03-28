@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Comics Club
+	</title>
+	<link rel="stylesheet" href="stylesheets/style.css">
+	<link rel="stylesheet" href="stylesheets/myacount.css">
+	<link rel="stylesheet" href="stylesheets/clubs.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="javascripts/login.js" defer></script>
+	<script src="javascripts/kyle.js" defer></script>
+	<script src="javascripts/logout.js" defer></script>
+	<script src="javascripts/compsciclub.js" defer></script>
+</head>
+
+<body>
+
+	<div class="top-menu" id="menu">
+		<a href="main.html">
+			<img class="logo" src="images/logo-dark.png" alt="logo">
+		</a>
+		<nav class="navigation">
+
+			<a href="sports.html">Sports</a>
+			<a href="culture.html">Culture</a>
+			<a href="faculty.html">Faculty</a>
+			<a href="arts.html">Arts</a>
+			<a href="faq.html">FAQ</a>
+
+			<!-- If user logged in, display buttons, else do not display -->
+			<!-- Also, if mouseover the myaccount button, should also display a menu of options,
+                 either to myaccount or to manage users (admins only) -->
+			<div v-if="logged_in" id="myaccount-dropdown">
+				<button type="button" id="myaccount" onclick="window.location.href='myaccount.html'">
+					<img src="images/Default Display Pic.png" alt="Default Display Pic">
+					<!-- <span>My Account</span> -->
+				</button>
+				<!-- The dropdown menu shows when hovering over the button. -->
+				<div class="dropdown">
+					<a class="dropdown-item" href="myaccount.html">My Account</a>
+					<a class="dropdown-item" href="manageusers.html" id="manage-users-link" style="display: none">Manage
+						Users</a>
+					<a class="dropdown-item" href="manageclubs.html" id="manage-clubs-link" style="display: none">Manage
+						Clubs</a>
+					<a class="dropdown-item" href="#" id="logout-button" onclick="logout()">Logout</a>
+				</div>
+			</div>
+
+			<div v-else>
+				<!-- When the user has logged in, these two buttons should be hidden -->
+				<button type="button" class="login" onclick="window.location.href='login.html'" id="login-nav"
+					v-show="!logged_in">Login</button>
+				<button type="button" class="signup" onclick="window.location.href='signup.html'" id="signup-nav"
+					v-show="!logged_in">Sign Up</button>
+			</div>
+		</nav>
+	</div>
+
+	<div class="intro">
+		<div id="club-info">
+			<div id="club-header">
+				<h1>Comics Club (CC)</h1>
+				<br />
+				<br />
+				<h2>About the club...</h2>
+				<p>
+					The Comics Club of the Uni of Adelaide is a student run club for those with an interest in
+					Comics or Graphic Novels. Though we are a uni club, we welcome anyone interested in
+					Comics and/or socialising to join!
+				</p>
+				<br />
+				<br />
+				<h2>Member's will have access to:</h2>
+				<ul>
+					<li>Frequent Comics discussion sessions</li>
+					<li>Comics reading sessions</li>
+					<li>Social nights</li>
+					<li>A wide network of Comics enjoyers.</li>
+					<li>
+						We also run cooperative food and drink ventures and hold pubcrawls and BBQs throughout the year,
+						and
+						hold a pubcrawl each semester.
+					</li>
+				</ul>
+				<br>
+			</div>
+
+			<img id="club-logo" src="images/Comics.png" alt="Comics Logo">
+
+		</div>
+	</div>
+
+	<div id="events-posts-container">
+		<div id="events-container">
+			<div id="events-line">
+				<hr class="line">
+				<h1>Events</h1>
+				<hr class="line">
+			</div>
+
+			<div id="events">
+				<ul id="events-list">
+					<li>
+						<div class="indiv-event" v-for="item in event1">
+							<h2>{{item.title}}</h2>
+							<div class="event-info">
+								<span>Date: {{item.date}}</span>
+								<span>Time: {{item.time}}</span>
+								<span>Venue: {{item.venue}}</span><br />
+								<p>
+									{{item.description}}
+								</p>
+							</div>
+						</div>
+						<button type="submit">RSVP</button>
+					</li>
+				</ul>
+			</div>
+
+
+			<div id="event-creation">
+				<!-- This button displays a popup div, which is the UI for creating new events. -->
+				<!-- The button is only visible to managers/admins -->
+				<button type="button" id="open-event-ui">Create Event</button>
+				<div id="event-ui">
+					<span class="close-button">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</span>
+					<form class="input-grid">
+						<input id="eventTitle" type="text" placeholder="Event Title">
+						<input id="eventTime" type="text" placeholder="Time">
+						<input id="eventDate" type="text" placeholder="Date">
+						<input id="eventVenue" type="text" placeholder="Venue">
+						<input id="eventCapacity" type="text" placeholder="Capacity">
+						<textarea id="eventDescription" placeholder="Description"></textarea>
+						<button type="submit">Submit</button>
+					</form>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div id="posts-container">
+			<div id="posts-line">
+				<hr class="line">
+				<h1>Posts</h1>
+				<hr class="line">
+			</div>
+
+			<div id="posts">
+				<ul id="posts-list">
+					<li>
+						<div class="indiv-post" v-for="post in post1">
+							<h2>{{post.title}}</h2>
+							<div class="post-info">
+								<span>Date: {{post.date}}</span>
+								<span>Time: {{post.time}}</span>
+								<p>{{post.content}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div id="post-creation">
+				<!-- This button displays a popup div, which is the UI for creating new events. -->
+				<!-- The button is only visible to managers/admins -->
+				<button type="button" id="open-post-ui">Create Post</button>
+				<div id="post-ui">
+					<span class="close-button">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</span>
+					<form class="input-grid">
+						<input id ="postTitle" type="text" placeholder="Post Title">
+						<input id ="postTime" type="text" placeholder="Time">
+						<input id="postDate" type="text" placeholder="Date">
+						<textarea id="postContent" placeholder="Post Content"></textarea>
+						<button type="submit">Submit</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+
+        <div id="members-container" style="display: none;">
+            <div id="members-line">
+                <hr class="line">
+                <!-- The following button will display the contact details section -->
+                <!-- showContact is set to false by default. -->
+
+
+				<!-- if showContact is false, show the button that will show the contact section -->
+				<button type="button" class="active-button" v-show="!showMembers"
+					v-on:click="showMembers = !showMembers">
+					<strong>Club Members</strong>
+					<i class="fa fa-chevron-down" aria-hidden="true"></i>
+				</button>
+
+				<!-- if showContact is true, show the button to hide contact details -->
+				<button type="button" v-show="showMembers" v-on:click="showMembers = !showMembers"
+					style="display: none;">
+					<strong>Club Members</strong>
+					<i class="fa fa-chevron-up" aria-hidden="true"></i>
+				</button>
+				<hr class="line">
+			</div>
+
+            <div id="members" v-show="showMembers">
+                <table id="members-list">
+                    <thead>
+                        <tr class="table-headers">
+                            <th>User ID</th>
+                            <th>Given Name</th>
+                            <th>Family Name</th>
+                            <th>Email</th>
+                            <th>HP</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "table-body">
+                        <tr class="table-data">
+                            <td>1</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Manager</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John</td>
+                            <td>Smith</td>
+                            <td>xxx@xxx.com</td>
+                            <td>0123456789</td>
+                            <td>Member</td>
+                            <td class="menu-bars">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                <div class="management-menu">
+                                    <div class="menu-box">
+                                        <button type="button">Change Role</button>
+                                        <button type="button">Delete User</button>
+                                    </div>
+                                </div>
+                            </td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+
+    <div id="become-member" style="display: none">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button type="submit" id="join-club" onclick="joinClub()">Become Member</button>
+    </div>
+
+</body>
+
+</html>

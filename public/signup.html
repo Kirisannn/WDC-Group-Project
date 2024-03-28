@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Sign-Up
+	</title>
+	<link rel="stylesheet" href="stylesheets/style.css">
+	<link rel="stylesheet" href="stylesheets/myacount.css">
+	<link rel="stylesheet" href="stylesheets/login_signup.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="javascripts/kyle.js" defer></script>
+	<script src="javascripts/signup.js" defer></script>
+</head>
+
+<body>
+
+	<div class="top-menu" id='menu'>
+		<a href="main.html">
+			<img class="logo" src="images/logo-dark.png" alt="logo">
+		</a>
+		<nav class="navigation">
+
+			<a href="sports.html">Sports</a>
+			<a href="culture.html">Culture</a>
+			<a href="faculty.html">Faculty</a>
+			<a href="arts.html">Arts</a>
+			<a href="faq.html">FAQ</a>
+
+			<!-- If user logged in, display buttons, else do not display -->
+			<!-- Also, if mouseover the myaccount button, should also display a menu of options,
+                 either to myaccount or to manage users (admins only) -->
+			<div v-if='logged_in' id="myaccount-dropdown">
+				<button type="button" id="myaccount" onclick="window.location.href='myaccount.html'">
+					<img src="images/Default Display Pic.png" alt="Default Display Pic">
+					<!-- <span>My Account</span> -->
+				</button>
+				<!-- The dropdown menu shows when hovering over the button. -->
+				<div class="dropdown">
+					<a class="dropdown-item" href="myaccount.html">MyAccount</a>
+					<a class="dropdown-item" href="manageusers.html" id="manage-users-link" style="display: none" >Manage Users</a>
+					<a class="dropdown-item" href="manageclubs.html" id="manage-clubs-link" style="display: none">Manage Clubs</a>
+				</div>
+			</div>
+
+			<div v-else><button onclick="window.location.href='login.html'" class="signup" type="submit">Login</button>
+			</div>
+		</nav>
+	</div>
+
+	<form class="loginbox">
+		<h1>Sign-Up Details</h1><br>
+
+		<label>First Name </label><br>
+		<input placeholder="Enter First Name" type="text" id="first-name"><br>
+		<label>Last Name </label><br>
+		<input placeholder="Enter Last Name" type="text" id="last-name"><br><br>
+
+		<label>Mobile Number</label>
+		<input placeholder="Enter Mobile Number" type="text" id="mobile-number"><br><br>
+
+		<label>Email:</label>
+		<input placeholder="Enter Email" type="email" id="email"><br>
+		<input placeholder="Confirm Email" type="email" id="confirm-email"><br><br>
+
+		<label>Password must be:</label><br>
+		<ul>
+			<li>At least 10 characters long</li>
+			<li>Contain at least 1 number</li>
+			<li>Contain at least 1 uppercase letter</li>
+			<li>Contain at least 1 lowercase letter</li>
+		</ul><br>
+		<label>Password: </label><br>
+		<input placeholder="Enter Password" type="password" id="password"><br>
+		<input placeholder="Confirm Password" type="password" id="confirm-password"><br>
+
+		<button type="submit" id="submit-button">Create Account</button>
+		<!-- <button type="submit" class="Facebook" style="background-color: #1877F2;" id="facebook-signup-button">Facebook
+			Signup</button> -->
+		<p style="padding-bottom: 150px;">Already have an account? <a href="login.html">Login here</a></p>
+	</form>
+
+</body>
+
+</html>

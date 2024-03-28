@@ -1,0 +1,96 @@
+.intro {
+    padding-top: 0;
+    margin-top: 12em;
+    margin-left: auto;
+}
+
+#user-table {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20em;
+}
+
+#user-table h1 {
+    display: block;
+    /* add this line */
+    margin: 0;
+    font-size: xxx-large;
+}
+
+.bordered {
+    border-collapse: collapse;
+    width: 40%;
+}
+
+.bordered th,
+.bordered td {
+    font-size: x-large;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.bordered th {
+    background-color: grey;
+    color: #333;
+}
+
+.no-border {
+    position: relative;
+    display: inline-block;
+    border: none !important;
+}
+
+.bordered i {
+    cursor: pointer;
+}
+
+.bordered i:hover {
+    color: blueviolet;
+}
+
+#management-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.menu-box {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    padding: 10px;
+    width: 5em;
+}
+
+.no-border:hover #management-menu {
+    display: block;
+}
+
+.menu-box button {
+    width: 100%;
+    font-size: medium;
+    background-color: #f2f2f2;
+    border: none;
+    text-align: left;
+}
+
+#user-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#search input {
+    width: 100%;
+}

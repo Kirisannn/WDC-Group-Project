@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        Contacts
+    </title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/myacount.css">
+    <link rel="stylesheet" href="stylesheets/clubs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="javascripts/login.js" defer></script>
+	<script src="javascripts/kyle.js" defer></script>
+	<script src="javascripts/logout.js" defer></script>
+</head>
+
+<body>
+
+    <div class="top-menu" id="menu">
+		<a href="main.html">
+			<img class="logo" src="images/logo-dark.png" alt="logo">
+		</a>
+		<nav class="navigation">
+
+			<a href="sports.html">Sports</a>
+			<a href="culture.html">Culture</a>
+			<a href="faculty.html">Faculty</a>
+			<a href="arts.html">Arts</a>
+			<a href="faq.html">FAQ</a>
+
+			<!-- If user logged in, display buttons, else do not display -->
+			<!-- Also, if mouseover the myaccount button, should also display a menu of options,
+                 either to myaccount or to manage users (admins only) -->
+			<div v-if="logged_in" id="myaccount-dropdown">
+				<button type="button" id="myaccount" onclick="window.location.href='myaccount.html'">
+					<img src="images/Default Display Pic.png" alt="Default Display Pic">
+					<!-- <span>My Account</span> -->
+				</button>
+				<!-- The dropdown menu shows when hovering over the button. -->
+				<div class="dropdown">
+					<a class="dropdown-item" href="myaccount.html">My Account</a>
+					<a class="dropdown-item" href="manageusers.html" id="manage-users-link" style="display: none" >Manage Users</a>
+					<a class="dropdown-item" href="manageclubs.html" id="manage-clubs-link" style="display: none">Manage Clubs</a>
+					<a class="dropdown-item" href="#" id="logout-button" onclick="logout()">Logout</a>
+				</div>
+			</div>
+
+			<div v-else>
+				<!-- When the user has logged in, these two buttons should be hidden -->
+				<button type="button" class="login" onclick="window.location.href='login.html'" id="login-nav"
+					v-show="!logged_in">Login</button>
+				<button type="button" class="signup" onclick="window.location.href='signup.html'" id="signup-nav"
+					v-show="!logged_in">Sign Up</button>
+			</div>
+		</nav>
+	</div>
+
+    <div class="about">
+        <h1>About Us</h1>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget blandit diam. Aliquam efficitur turpis
+            quis tempor accumsan. Mauris tempus magna et enim hendrerit eleifend. Maecenas bibendum eu velit quis
+            tincidunt. Integer finibus sapien non mauris interdum, quis interdum urna venenatis. Maecenas pulvinar justo
+            vel justo egestas, vitae sodales enim ultrices. Aenean efficitur imperdiet convallis. Quisque placerat
+            laoreet libero, vitae auctor mauris facilisis vitae.
+
+            Quisque commodo mauris nec lectus sagittis, at sollicitudin libero rutrum. Sed iaculis risus sit amet arcu
+            pretium semper. Quisque maximus, sapien sollicitudin tincidunt laoreet, velit libero mattis quam, in
+            scelerisque risus mauris at erat. Nam vel feugiat est. Maecenas mi massa, accumsan ut leo id, elementum
+            ullamcorper ante. Mauris ac semper turpis. Mauris et justo turpis. Quisque porttitor eleifend odio, eget
+            cursus leo ullamcorper vitae. Ut in ornare urna.
+
+            Nullam a justo odio. Phasellus diam ipsum, egestas eu elementum non, faucibus quis leo. Sed ultricies quis
+            nisi vel vestibulum. Vivamus id tincidunt odio, et ultricies velit. Sed dignissim eleifend hendrerit. Aenean
+            ex dui, feugiat interdum arcu sit amet, laoreet fringilla magna. Duis blandit vulputate vestibulum. Mauris
+            interdum est justo, id congue ligula scelerisque at. Orci varius natoque penatibus et magnis dis parturient
+            montes, nascetur ridiculus mus. In interdum augue a luctus pellentesque. Suspendisse potenti. Duis sodales
+            pretium enim, quis aliquam purus euismod non. Quisque at congue augue. Duis ac tincidunt augue.
+
+            Pellentesque vel elementum lectus. Fusce varius eget quam vel venenatis. Fusce ullamcorper, dolor luctus
+            vestibulum facilisis, neque enim tristique arcu, ullamcorper vestibulum est nisl et mi. Aenean hendrerit
+            sagittis est, sit amet vestibulum felis venenatis sed. Donec vitae urna placerat, fringilla lectus a,
+            aliquam odio. Praesent ultrices eleifend ex, et tempus erat rhoncus sed. Sed lacinia porta sapien eget
+            scelerisque. </p>
+    </div>
+
+
+
+</body>
+
+</html>

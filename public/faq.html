@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        FAQ
+    </title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/myacount.css">
+    <link rel="stylesheet" href="stylesheets/clubs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="javascripts/login.js" defer></script>
+    <script src="javascripts/kyle.js" defer></script>
+    <script src="javascripts/logout.js" defer></script>
+</head>
+
+<body>
+
+    <div class="top-menu" id="menu">
+        <a href="main.html">
+            <img class="logo" src="images/logo-dark.png" alt="logo">
+        </a>
+        <nav class="navigation">
+
+            <a href="sports.html">Sports</a>
+            <a href="culture.html">Culture</a>
+            <a href="faculty.html">Faculty</a>
+            <a href="arts.html">Arts</a>
+            <a href="faq.html">FAQ</a>
+
+            <!-- If user logged in, display buttons, else do not display -->
+            <!-- Also, if mouseover the myaccount button, should also display a menu of options,
+                 either to myaccount or to manage users (admins only) -->
+            <div v-if="logged_in" id="myaccount-dropdown">
+                <button type="button" id="myaccount" onclick="window.location.href='myaccount.html'">
+                    <img src="images/Default Display Pic.png" alt="Default Display Pic">
+                    <!-- <span>My Account</span> -->
+                </button>
+                <!-- The dropdown menu shows when hovering over the button. -->
+                <div class="dropdown">
+                    <a class="dropdown-item" href="myaccount.html">My Account</a>
+                    <a class="dropdown-item" href="manageusers.html" id="manage-users-link" style="display: none" >Manage Users</a>
+					<a class="dropdown-item" href="manageclubs.html" id="manage-clubs-link" style="display: none">Manage Clubs</a>
+                    <a class="dropdown-item" href="#" id="logout-button" onclick="logout()">Logout</a>
+                </div>
+            </div>
+
+            <div v-else>
+                <!-- When the user has logged in, these two buttons should be hidden -->
+                <button type="button" class="login" onclick="window.location.href='login.html'" id="login-nav"
+                    v-show="!logged_in">Login</button>
+                <button type="button" class="signup" onclick="window.location.href='signup.html'" id="signup-nav"
+                    v-show="!logged_in">Sign Up</button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="faq">
+        <h1>FAQ</h1>
+        <h2>Accounts</h2><br>
+        <a class="question">Q: What do I do if I forget my password?</a><br>
+        <a class="answer">A: Go into login and click on 'Forgot Password' then enter your email to receive a
+            notification to change your password.</a>
+
+        <h2>Club Managers</h2><br>
+        <a class="question">Q: How do I get in contact with a club manager?</a><br>
+        <a class="answer">A: Club managers details should be available in the selected club page, use those
+            details to get into contact with them.</a>
+
+        <h2>Clubs</h2><br>
+        <a class="question">Q: How do I join a club?</a><br>
+        <a class="answer">A: Send in a request to join the club, club managers should be notified of this and
+            send you an email regarding instructions on how to join.</a>
+    </div>
+
+
+
+</body>
+
+</html>

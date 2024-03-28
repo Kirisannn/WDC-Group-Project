@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>
+		Faculty Clubs
+	</title>
+	<link rel="stylesheet" href="stylesheets/style.css">
+	<link rel="stylesheet" href="stylesheets/myacount.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="stylesheets/categories.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="javascripts/login.js" defer></script>
+	<script src="javascripts/kyle.js" defer></script>
+	<script src="javascripts/logout.js" defer></script>
+	<script src="javascripts/kyleclubs.js" defer></script>
+
+</head>
+
+<body>
+	<div class="top-menu" id="menu">
+		<a href="main.html">
+			<img class="logo" src="images/logo-dark.png" alt="logo">
+		</a>
+		<nav class="navigation">
+
+			<a href="sports.html">Sports</a>
+			<a href="culture.html">Culture</a>
+			<a href="faculty.html">Faculty</a>
+			<a href="arts.html">Arts</a>
+			<a href="faq.html">FAQ</a>
+
+			<!-- If user logged in, display buttons, else do not display -->
+			<!-- Also, if mouseover the myaccount button, should also display a menu of options,
+                 either to myaccount or to manage users (admins only) -->
+			<div v-if="logged_in" id="myaccount-dropdown">
+				<button type="button" id="myaccount" onclick="window.location.href='myaccount.html'">
+					<img src="images/Default Display Pic.png" alt="Default Display Pic">
+					<!-- <span>My Account</span> -->
+				</button>
+				<!-- The dropdown menu shows when hovering over the button. -->
+				<div class="dropdown">
+					<a class="dropdown-item" href="myaccount.html">My Account</a>
+					<a class="dropdown-item" href="manageusers.html" id="manage-users-link" style="display: none" >Manage Users</a>
+					<a class="dropdown-item" href="manageclubs.html" id="manage-clubs-link" style="display: none">Manage Clubs</a>
+					<a class="dropdown-item" href="#" id="logout-button" onclick="logout()">Logout</a>
+				</div>
+			</div>
+
+			<div v-else>
+				<!-- When the user has logged in, these two buttons should be hidden -->
+				<button type="button" class="login" onclick="window.location.href='login.html'" id="login-nav"
+					v-show="!logged_in">Login</button>
+				<button type="button" class="signup" onclick="window.location.href='signup.html'" id="signup-nav"
+					v-show="!logged_in">Sign Up</button>
+			</div>
+		</nav>
+	</div>
+
+	<div class="intro">
+		<h1 id="page_title">Faculty Clubs</h1>
+
+		<br />
+		<br />
+
+		<h2 id="welcome_header">Welcome to the Faculty-Related Clubs page!</h2>
+		<br />
+		<p>
+			Here, you can look through the faculty-related clubs we have available for you to join! Joining these clubs
+			offer a
+			range of possible benefits, including:</p>
+		<br />
+		<ul>
+			<li>Networking</li>
+			<li>Career Development</li>
+			<li>Social Connections</li>
+			<li>Leadership Experience</li>
+			<li>Resume Building</li>
+			<li>Personal Growth</li>
+
+		</ul>
+	</div>
+
+	<div id="vue_clubs">
+		<h1>Search</h1>
+		<div id="search">
+			<input v-model="searchQuery" type="text" placeholder="Start typing the club name...">
+		</div>
+		<ul id="myUL">
+			<li v-for="(item, index) in faculty_clubs.filter(club => !searchQuery || club.name.toLowerCase().includes(searchQuery.toLowerCase()))"
+				:key="index">
+				<a :href="item.url">{{ item.name }}</a>
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,316 @@
+.intro {
+	display: flex;
+}
+
+#club-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+
+#club-logo {
+	height: 400px;
+	align-self: flex-start;
+}
+
+#events-posts-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	width: 90%;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 2%;
+	padding-bottom: 10%;
+	height: 45em;
+}
+
+#events-posts-container h1 {
+	font-size: xxx-large;
+	text-align: left;
+	padding: 0 3% 0;
+}
+
+#events-container,
+#events-line,
+#posts-container,
+#posts-line,
+#members-container,
+#members-line {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+#events-line {
+	padding-bottom: 1%;
+}
+
+#posts-line {
+	padding-bottom: 1%;
+	padding-top: 1%;
+}
+
+#events-container,
+#posts-container,
+#members-container {
+	flex-direction: column;
+}
+
+#events,
+#posts {
+	width: 100%;
+	height: 20em;
+	overflow: scroll;
+	border: 10px inset black;
+	border-radius: 15px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	flex-shrink: 0;
+}
+
+#events-list,
+#posts-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	font-size: large;
+	overflow: scroll;
+	background-color: darkgrey;
+}
+
+#events-list li,
+#posts-list li {
+	margin: 0.25%;
+	width: 99%;
+	display: flex;
+	height: 100%;
+	overflow: auto;
+	padding-left: 5px;
+}
+
+#events-list p,
+#posts-list p {
+	padding-top: 1em;
+	padding-bottom: 0.3em;
+}
+
+#events-list li::before,
+#posts-list li::before {
+	content: none;
+}
+
+#events-list li:first-child,
+#posts-list li:first-child {
+	margin-top: 0.5em;
+}
+
+.indiv-event,
+.indiv-post {
+	border: 5px inset black;
+	width: 90%;
+	overflow: scroll;
+	background-color: white;
+}
+
+.indiv-post {
+	width: 100%;
+	height: fit-content;
+}
+
+#posts-list li {
+	height: fit-content;
+}
+
+/* Button in events-list */
+#events-list li button,
+#posts-list li button {
+	width: 10%;
+	border: 5px inset black;
+}
+
+/* Events & Posts creation UI. */
+#open-event-ui,
+#open-post-ui,
+#join-club {
+	font-size: x-large;
+	padding: 10px;
+	border-radius: 15px;
+	border-width: 2px;
+	border-color: black;
+	border-style: outset;
+	background-color: lightgrey;
+}
+
+#event-ui,
+#post-ui {
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	position: fixed;
+	top: 25%;
+	bottom: 5%;
+	left: 25%;
+	right: 5%;
+	width: 50%;
+	height: 55%;
+	background-color: whitesmoke;
+	color: white;
+	font-size: 24px;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	border-width: 5px;
+	border-style: solid;
+	/* border color grey and translucent */
+	border-color: rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
+	padding: 20px;
+}
+
+#event-ui {
+	display: none;
+	height: 60%;
+}
+
+#post-ui {
+	display: none;
+}
+
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.input-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+	margin-bottom: 20px;
+	margin-top: 15px;
+}
+
+#event-ui input {
+	width: 100%;
+	padding: 10px;
+	font-size: 18px;
+}
+
+#post-ui input {
+	width: auto;
+	padding: 10px;
+	font-size: 18px;
+}
+
+#post-ui input:nth-child(1) {
+	grid-column: span 2;
+}
+
+.input-grid textarea {
+	grid-column: 1 / span 2;
+	width: 100%;
+	height: 150px;
+	resize: none;
+}
+
+#event-ui button[type="submit"],
+#post-ui button[type="submit"] {
+	padding: 10px 20px;
+	font-size: 18px;
+	grid-column: 1 / span 2;
+}
+
+#event-ui i,
+#post-ui i {
+	z-index: 10000;
+	color: black;
+}
+
+#members-line {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+#members-line button {
+	font-size: xxx-large;
+	padding: 0 1% 0;
+	background-color: transparent;
+	border: none;
+}
+
+#members {
+	width: 100%;
+	height: 20em;
+	overflow: scroll;
+	margin-top: 1%;
+	margin-bottom: 5%;
+	flex-shrink: 0;
+	display: flex;
+}
+
+#members-list {
+	border-collapse: collapse;
+	margin-top: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+}
+
+table tr th,
+table tr td {
+	text-align: center;
+	border-width: 3px;
+	border-style: solid;
+}
+
+table tr th {
+	font-size: x-large;
+	width: 7em;
+	height: 2em;
+	background-color: grey;
+}
+
+table tr td {
+	height: 3em;
+	background-color: snow;
+}
+
+.menu-bars {
+	width: 50px;
+	position: relative;
+	display: flex;
+	border: none !important;
+	background-color: transparent;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+}
+
+
+
+.menu-box button {
+	width: 100%;
+	font-size: medium;
+	background-color: #f2f2f2;
+	border: none;
+	text-align: left;
+	margin: 1%;
+}
+
+#members-list i {
+	cursor: pointer;
+}
+
+#members-list i:hover {
+	color: blueviolet;
+}
+
+#become-member {
+	margin-bottom: 4em;
+}

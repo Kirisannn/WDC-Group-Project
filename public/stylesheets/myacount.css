@@ -1,0 +1,235 @@
+#myaccount-dropdown {
+	position: relative;
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	padding: 5% 0;
+	background-color: white;
+	border-style: solid;
+	border-color: blueviolet;
+	border-width: 5px;
+	border-radius: 30%;
+}
+
+.dropdown a {
+	color: grey;
+}
+
+#myaccount-dropdown .dropdown .dropdown-item {
+	font-size: large;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+}
+
+#myaccount-dropdown:hover .dropdown {
+	display: block;
+}
+
+#myaccount-dropdown .dropdown:hover {
+	display: block;
+}
+
+/* Show the menu when hovering over the dropdown items */
+#myaccount-dropdown .dropdown-item:hover~.dropdown {
+	display: block;
+}
+
+#myaccount {
+	width: 75px;
+	height: 75px;
+	margin-right: 40px;
+	margin-left: 40px;
+	border-radius: 50%;
+	align-items: center;
+	padding: 15px;
+}
+
+#basic-info {
+	display: flex;
+	align-items: center;
+}
+
+#account-pic button {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: #ccc;
+	border: none;
+}
+
+#account-details {
+	margin-left: 20px;
+}
+
+#given-name {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#family-name {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#user-id {
+	font-size: 16px;
+	color: #999;
+}
+
+#clubs ul {
+	display: block;
+	font-size: larger;
+}
+
+#menu-icon {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#contacts {
+	display: flex;
+	justify-content: space-around;
+}
+
+.save-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.save-button {
+	width: 10em;
+	height: 2em;
+	font-size: 1.2em;
+	background-color: #ccc;
+	border-radius: 5px;
+  }
+
+
+
+
+#display-contact-section,
+#display-notifications-section,
+#display-password-section {
+	display: flex;
+	align-items: center;
+}
+
+.line {
+	flex-grow: 1;
+	height: 4px;
+	border: none;
+	background-color: black;
+}
+
+#display-contact-section button,
+#display-notifications-section button,
+#display-password-section button {
+	padding: 10px 20px;
+	background: transparent;
+	border: none;
+	font-size: 200%;
+	justify-content: center;
+}
+
+#emails,
+#hp,
+#password-change {
+	font-size: 1.5em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+/* #hp {
+    margin-left: 10em;
+} */
+
+#emails p,
+#hp p {
+	margin-bottom: 0.5em;
+}
+
+#currentEmail,
+#currentHp {
+	padding-bottom: 2em;
+}
+
+#emails input,
+#hp input,
+#password-change input {
+	width: 20em;
+	height: 2em;
+	margin-top: 3px;
+	font-size: 20px;
+	/* make border size 2em */
+	border: 3px inset black
+}
+
+#notif-options-container {
+	display: flex;
+	align-items: right;
+	justify-content: space-around;
+	font-size: 1.5em;
+}
+
+#sys-notifs,
+#club-notifs {
+	display: flex;
+	flex-direction: column;
+}
+
+#sys-notifs ul,
+#club-notifs ul {
+	list-style: none;
+	text-align: right;
+	padding: 0;
+}
+
+/* input checkbox size same as 1.5em font */
+#sys-notifs input,
+#club-notifs input {
+	width: 1.5em;
+	height: 1.5em;
+	margin-right: 0.5em;
+}
+
+#password-change {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* Have the div be smaller and in the middle */
+	width: 30%;
+	/* Increase height */
+	height: 50%;
+	margin-left: 30%;
+}
+
+/* password change strong with margin-bottom  */
+#password-change strong {
+	margin-bottom: 1em;
+}
+
+#password-change p {
+	text-align: right;
+}
+
+.profile-pic {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #000;
+	cursor: pointer;
+  }
+
+  .hidden {
+	display: none;
+  }

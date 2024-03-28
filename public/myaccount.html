@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    My Account
+  </title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="stylesheets/myacount.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="javascripts/login.js" defer></script>
+  <script src="javascripts/kyle.js" defer></script>
+  <script src="javascripts/myaccount.js" defer></script>
+  <script src="javascripts/logout.js" defer></script>
+
+</head>
+
+<body>
+
+  <div class="top-menu" id="menu">
+    <a href="main.html">
+      <img class="logo" src="images/logo-dark.png" alt="logo">
+    </a>
+    <nav class="navigation">
+
+      <a href="sports.html">Sports</a>
+      <a href="culture.html">Culture</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="arts.html">Arts</a>
+      <a href="faq.html">FAQ</a>
+
+      <!-- If user logged in, display buttons, else do not display -->
+      <!-- Also, if mouseover the myaccount button, should also display a menu of options,
+                 either to myaccount or to manage users (admins only) -->
+      <div v-if="logged_in" id="myaccount-dropdown">
+        <button type="button" id="myaccount" onclick="window.location.href='myaccount.html'">
+          <img src="images/Default Display Pic.png" alt="Default Display Pic">
+          <!-- <span>My Account</span> -->
+        </button>
+        <!-- The dropdown menu shows when hovering over the button. -->
+        <div class="dropdown">
+          <a class="dropdown-item" href="myaccount.html">My Account</a>
+          <a class="dropdown-item" href="manageusers.html" id="manage-users-link" style="display: none" >Manage Users</a>
+					<a class="dropdown-item" href="manageclubs.html" id="manage-clubs-link" style="display: none">Manage Clubs</a>
+          <a class="dropdown-item" href="#" id="logout-button" onclick="logout()">Logout</a>
+        </div>
+      </div>
+
+      <div v-else>
+        <!-- When the user has logged in, these two buttons should be hidden -->
+        <button type="button" class="login" onclick="window.location.href='login.html'" id="login-nav"
+          v-show="!logged_in">Login</button>
+        <button type="button" class="signup" onclick="window.location.href='signup.html'" id="signup-nav"
+          v-show="!logged_in">Sign Up</button>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="intro" id="mainPage">
+    <h1>My Account</h1>
+
+    <br />
+    <br />
+
+    <div id="account">
+      <div id="basic-info">
+        <div id="account-pic">
+          <img class="profile-pic" id='profile-pic' src="images/Default Display Pic.png" alt="Profile Picture"
+            onclick="showPresetImages()">
+        </div>
+        <div id="preset-images" style="display: none;">
+          <img class="profile-pic" src="images/pfps/bobross.jpg" alt="Preset 1"
+            onclick="selectPresetImage('images/pfps/bobross.jpg')">
+          <img class="profile-pic" src="images/pfps/darwinnunez.png" alt="Preset 2"
+            onclick="selectPresetImage('images/pfps/darwinnunez.png')">
+          <img class="profile-pic" src="images/pfps/goku.jpg" alt="Preset 3"
+            onclick="selectPresetImage('images/pfps/goku.jpg')">
+          <img class="profile-pic" src="images/pfps/ronaldo.jpg" alt="Preset 4"
+            onclick="selectPresetImage('images/pfps/ronaldo.jpg')">
+          <img class="profile-pic" src="images/pfps/stevejobs.jpg" alt="Preset 5"
+            onclick="selectPresetImage('images/pfps/stevejobs.jpg')">
+          <img class="profile-pic" src="images/pfps/johndoe.png" alt="Preset 6"
+            onclick="selectPresetImage('images/pfps/johndoe.png')">
+        </div>
+        <br>
+        <div id="account-details">
+          <span id="given-name">Your</span>
+          <span id="family-name">Name</span>
+
+          <!-- This should only be displayed if the person looking is the user or admin -->
+          <span id="user-id" style="display: none;">#a1XXXXXX</span>
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div id="clubs">
+        <h2>Clubs Joined:</h2>
+        <br />
+        <ul id="club-list">
+        </ul>
+      </div>
+
+      <br />
+      <br />
+
+    </div>
+
+    <div id="contact-details">
+      <div id="display-contact-section">
+        <hr class="line">
+
+        <!-- The following button will display the contact details section -->
+        <!-- showContact is set to false by default. -->
+
+        <!-- if showContact is false, show the button that will show the contact section -->
+        <button type="button" class="active-button" v-show="!showContact" v-on:click="showContact = !showContact">
+          <strong>Contact Details</strong>
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <!-- if showContact is true, show the button to hide contact details -->
+        <button type="button" v-show="showContact" v-on:click="showContact = !showContact">
+          <strong>Contact Details</strong>
+          <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        </button>
+
+        <hr class="line">
+      </div>
+
+      <br />
+      <br />
+
+      <div id="contacts" v-show="showContact">
+        <!-- The following sections will be hidden by default, and will only be displayed when showContact is true. -->
+        <div id="emails">
+          <p id="currentEmail">email: myemail@example.com </p>
+          <p>
+            Change email
+            <span>
+              <input type="text" id="emailInput" placeholder="New Email">
+              <!-- Show the tick only if the email is available (not currently in the database) -->
+              <i class="fa fa-check" id="changeEmailCheckIcon" aria-hidden="true" style="display: none"></i>
+              <!-- Show the cross by default until the email is a valid format and available. (xxxx@xxxx.com) -->
+              <i class="fa fa-times" id="changeEmailCrossIcon" aria-hidden="true" style="display: none"></i>
+            </span>
+          </p>
+          <p>
+            Confirm email
+            <span>
+              <input type="text" id="confirmEmailInput" placeholder="Confirm Email">
+              <!-- Show the tick only if the email is available (not currently in the database) -->
+              <i class="fa fa-check" id="confirmEmailCheckIcon" aria-hidden="true" style="display: none"></i>
+              <!-- Show the cross by default until the email matches the previous input. -->
+              <i class="fa fa-times" id="confirmEmailCrossIcon" aria-hidden="true" style="display: none"></i>
+            </span>
+          </p>
+          <br />
+          <br />
+
+          <div class="save-container">
+            <button type="button" class="save-button" id="saveEmailButton" v-show="showContact"
+              onclick="handleSaveEmail()">Save Email
+              Changes</button>
+          </div>
+        </div>
+
+        <div id="hp">
+          <p id="currentHp">HP: HP</p>
+          <p>
+            Change HP
+            <span>
+              <input type="text" id="hpInput" placeholder="New HP">
+              <!-- Show the tick only if the HP is available and correct -->
+              <i class="fa fa-check" id="changeHPCheckIcon" aria-hidden="true" style="display: none"></i>
+              <!-- Show the cross by default until the HP is a valid format and available (10 digits) -->
+              <i class="fa fa-times" id="changeHPCrossIcon" aria-hidden="true" style="display: none"></i>
+            </span>
+          </p>
+          <p>
+            Confirm HP
+            <span>
+              <input type="text" id="confirmHPInput" placeholder="Confirm HP">
+              <!-- Show the tick only if the HP matches the previous input -->
+              <i class="fa fa-check" id="confirmHPCheckIcon" aria-hidden="true" style="display: none"></i>
+              <!-- Show the cross by default until the HP matches the previous input. -->
+              <i class="fa fa-times" id="confirmHPCrossIcon" aria-hidden="true" style="display: none"></i>
+            </span>
+          </p>
+          <br />
+          <br />
+
+          <div class="save-container">
+            <button type="button" class="save-button" id="saveHPButton" v-show="showContact"
+              onclick="handleSaveHP()">Save HP Changes</button>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+    </div>
+
+    <div id="notification-settings">
+      <div id="display-notifications-section">
+        <hr class="line">
+
+        <!-- The following button will display the notification settings section -->
+        <!-- showNotifications is set to false by default. -->
+
+        <!-- if showNotifications is false, show the button that will show the notification section -->
+        <button type="button" class="active-button" v-show="!showNotifications"
+          v-on:click="showNotifications = !showNotifications">
+          <strong>Notification Settings</strong>
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <!-- if showNotifications is true, show the button to hide notification settings -->
+        <button type="button" v-show="showNotifications" v-on:click="showNotifications = !showNotifications">
+          <strong>Notification Settings</strong>
+          <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        </button>
+
+        <hr class="line">
+      </div>
+
+      <br />
+      <br />
+
+      <div id="notif-options-container" v-show="showNotifications">
+        <div id="sys-notifs">
+          <ul>
+            <li>
+              <label>Send me Email notifications (Club updates and events)</label>
+              <input type="checkbox" name="notifications settings" id="n-changes" value="isChecked"
+                onclick="handleCheckboxChange(this, 'n-changes-x')">
+            </li>
+            <li>
+              <label>Don't send me Email notifications (For club updates)</label>
+              <input type="checkbox" name="notifications settings" id="n-changes-x" value="isChecked"
+                onclick="handleCheckboxChange(this, 'n-changes')">
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
+      <div class="save-container">
+        <button type="button" class="save-button" v-show="showNotifications" id="saveNotifications"
+          onclick="notificationSettings()">Save Changes</button>
+      </div>
+
+      <br />
+      <br />
+    </div>
+
+    <div id="password-settings">
+      <div id="display-password-section">
+        <hr class="line">
+
+        <!-- The following button will display the password settings section -->
+        <!-- showPassword is set to false by default. -->
+
+        <!-- if showPassword is false, show the button that will show the password section -->
+        <button type="button" class="active-button" v-show="!showPassword" v-on:click="showPassword = !showPassword">
+          <strong>Security Settings</strong>
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <!-- if showPassword is true, show the button to hide password settings -->
+        <button type="button" v-show="showPassword" v-on:click="showPassword = !showPassword">
+          <strong>Security Settings</strong>
+          <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        </button>
+
+        <hr class="line">
+      </div>
+
+      <br />
+      <br />
+
+      <div id="password-change" v-show="showPassword">
+        <strong>Password Change:</strong>
+        <ul>
+          <li>At least 10 characters long</li>
+          <li>Contain at least 1 number</li>
+          <li>Contain at least 1 uppercase letter</li>
+          <li>Contain at least 1 lowercase letter</li>
+        </ul>
+
+        <br />
+        <br />
+
+        <p>
+          Current Password
+          <span>
+            <input type="password" placeholder="Current Password" id="currentPasswordInput">
+            <!-- Show the tick only if the password is valid and matches the user's current password -->
+            <i class="fa fa-check" aria-hidden="true" style="display: none" id="currentPasswordCheck"></i>
+            <!-- Show the cross by default until the password is valid and matches the user's current password -->
+            <i class="fa fa-times" aria-hidden="true" style="display: none" id="currentPasswordCross"></i>
+          </span>
+        </p>
+        <p>
+          New Password
+          <span>
+            <input type="password" placeholder="New Password" id="newPasswordInput">
+            <!-- Show the tick only if the password is valid -->
+            <i class="fa fa-check" aria-hidden="true" style="display: none" id="newPasswordCheck"></i>
+            <!-- Show the cross by default until the password is valid -->
+            <i class="fa fa-times" aria-hidden="true" style="display: none" id="newPasswordCross"></i>
+          </span>
+        </p>
+        <p>
+          Confirm Password
+          <span>
+            <input type="password" placeholder="Confirm Password" id="confirmPasswordInput">
+            <!-- Show the tick only if the password matches the previous input -->
+            <i class="fa fa-check" aria-hidden="true" style="display: none" id="confirmPasswordCheck"></i>
+            <!-- Show the cross by default until the password matches the previous input -->
+            <i class="fa fa-times" aria-hidden="true" style="display: none" id="confirmPasswordCross"></i>
+          </span>
+        </p>
+      </div>
+
+      <br />
+      <br />
+
+      <div class="save-container">
+        <button type="button" class="save-button" v-show="showPassword" id="savePasswordButton"
+          onclick="handleSavePassword()">Save Changes</button>
+      </div>
+
+      <br />
+      <br />
+    </div>
+  </div>
+</body>
+
+</html>

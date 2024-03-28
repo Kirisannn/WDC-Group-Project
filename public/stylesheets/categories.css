@@ -1,0 +1,39 @@
+#myUL li img {
+	height: 300px;
+}
+
+#vue_clubs {
+	display: flex;
+	flex-direction: column;
+	/* Align elements in a column */
+	align-items: left;
+	/* Center align items horizontally */
+	padding: 3em 10% 0;
+	/* Top, left, and right padding */
+	width: 100%;
+	text-align: left;
+	margin-bottom: 1em;
+}
+
+#search {
+	display: flex;
+	/* Display the input and button inline */
+	justify-content: left;
+	/* Center align items horizontally */
+	margin-bottom: 1em;
+	/* Add some space below the search input */
+}
+
+#search input {
+	width: 40%;
+	border-radius: 20px;
+	padding: 1em;
+	font-size: 1em;
+	border: 5px inset blueviolet;
+	/* Combined border shorthand */
+	box-shadow: none;
+}
+
+#vue_clubs ul {
+	padding-left: 5%;
+}
